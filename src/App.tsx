@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, ChangeEvent } from 'react';
+import { useLLM } from './services/llm/hooks/useLLM';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const App = (): JSX.Element => {
+    const [input, setInput] = useState<string>('');
 
-export default App;
+    const { response, submitPrompt } = useLLM();
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
+    };
+
+    const handleSubmitText = () => {
+        submitPrompt(input);
+        setInput('');
+    };
+
+    return (
+        <main>
+            <div className="prompt-input">
+                <input value={input} onChange={handleInputChange} />
+                <button onClick={handleSubmitText}>Enter</button>
+            </div>
+            <div className="llm-response">
+                <p>{response ? response : 'no response'}</p>
+            </div>
+        </main>
+    );
+};

@@ -1,0 +1,29 @@
+html, 
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+main {     
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+
+}
+
+.llm-response {
+    display: block;
+    background-color: aqua;
+}
+
+.prompt-input{
+    display: flex;
+    flex-direction: row;
+}
